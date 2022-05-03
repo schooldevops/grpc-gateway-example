@@ -306,3 +306,8 @@ curl http://localhost:9000/v1/echo/golang
 
 - grpc gateway: https://github.com/grpc-ecosystem/grpc-gateway
 - grpc samples: https://devjin-blog.com/golang-grpc-server-3/
+- go swagger: https://goswagger.io/install.html
+  - https://blog.bullgare.com/2020/07/complete-list-of-swagger-options-to-protobuf-file/
+- https://blog.gopheracademy.com/advent-2017/go-grpc-beyond-basics/
+- https://levelup.gitconnected.com/grpc-basics-part-2-rest-and-swagger-53ec2417b3c4
+- 

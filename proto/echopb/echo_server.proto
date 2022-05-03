@@ -4,9 +4,47 @@ package proto;
 option go_package = "echopb";
 
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+	info: {
+		title: "Echo API";
+		version: "1.0";
+		description: "Echo API ";
+		contact: {
+			name: "gRPC-Gateway project";
+			url: "https://github.com/grpc-ecosystem/grpc-gateway";
+			email: "none@example.com";
+		};
+		license: {
+			name: "BSD 3-Clause License";
+			url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/master/LICENSE.txt";
+		};
+	};
+	schemes: [HTTP, HTTPS];
+	consumes: "application/json";
+	produces: "application/json";
+};
 
 message EchoRequest {
-	string message = 1;
+	// option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  //   json_schema: {
+	// 		title: "Echo Request for testing";
+	// 		description: "Echo test payload";
+	// 		required: ["message"];
+	// 	}
+	// 	external_docs: {
+	// 		url: "https://github.com/grpc-ecosystem/grpc-gateway";
+	// 		description: "Find out more about EchoRequest";
+	// 	}
+	// 	example: "{\"message\": \"kido\"}"
+  // };
+
+	string message = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+		title: "echo message",
+		description: "message for echo testing",
+		format: "string",
+	}];
 }
 
 message EchoResponse {
@@ -17,6 +55,17 @@ service EchoService {
 	rpc Echo(EchoRequest) returns (EchoResponse) {
 		option (google.api.http) = {
 			get: "/v1/echo/{message}"
+		};
+		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+			summary: "Get a message.";
+			operation_id: "Echo message";
+			tags: "echo";
+			responses: {
+				key: "200"
+					value: {
+					description: "OK";
+				}
+			}
 		};
 	}
 }
